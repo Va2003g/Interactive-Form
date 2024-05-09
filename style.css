@@ -78,6 +78,24 @@
     background: #FAFDFF;
 }
 
+.form form input{
+    padding:3%;
+    font-size: 14px;
+}
+.form form input:focus{
+    border-color:#E8E8E8;
+}
+.form form input + p{
+    color:red;
+    font-size: 12px;
+    display: none;
+}
+.form form input + p::before{
+    content: "*";
+    color:red;
+    font-size: 12px;
+}
+
 #gender {
     text-align: center;
     width: 70px;
