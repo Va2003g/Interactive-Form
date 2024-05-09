@@ -16,38 +16,62 @@
         </div>
 
         <div class="form">
-            <form action="">
+            <form action="mailto:vanshgupta4661@gmail.com" enctype="text/plain">
                 <div>
-                    <label for="name">Name: </label>
-                    <input type="text" id="name" name="name">
+                    <div>
+                        <label for="name">Name: </label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
 
-                    <label for="email">Email: </label>
-                    <input type="email" id="email" name="email">
+                    <div>
+                        <label for="email">Email: </label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
                 </div>
 
-                <label for="password">Password: </label>
-                <input type="password" id="password" name="password">
+                <div>
+                    <div>
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
 
-                <label for="cnfPswd">Confirm Password: </label>
-                <input type="password" id="cnfPswd" name="Confirm Password">
-
-                <label for="dob">Date of Birth: </label>
-                <input type="date" id="dob" name="dob">
-
-                <label for="phoneNo">Phone No</label>
-                <input type="number" name="phoneNo" id="phoneNo">
-
-                <label for="gender">Gender: </label>
-                <select name="gender" id="gender">
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Other">Other</option>
-                </select>
+                    <div>
+                        <label for="cnfPswd">Confirm Password: </label>
+                        <input type="password" id="cnfPswd" name="Confirm Password" required>
+                    </div>
+                </div>
 
                 <div>
-                    <input type="checkbox" name="term&conditions" id="term&conditions">
-                    <label for="term&conditions">I agree to all Terms and Conditions</label>
+                    <div>
+                        <label for="dob">Date of Birth: </label>
+                        <input type="date" id="dob" name="dob" required>
+                    </div>
+
+                    <div>
+
+                        <label for="phoneNo">Phone No: </label>
+                        <input type="number" name="phoneNo" id="phoneNo" required>
+                    </div>
                 </div>
+
+                <div class="box">
+                    <label for="gender">Gender: </label>
+                    <select name="gender" id="gender" required>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="box">
+                    <input type="checkbox" name="termconditions" id="termconditions" required>
+                    <label for="termconditions">I agree to all Terms and Conditions</label>
+                </div>
+
+                <div id="submit">
+                    <button id="submitbtn">Submit</button>
+                </div>
+
             </form>
         </div>
     </div>
