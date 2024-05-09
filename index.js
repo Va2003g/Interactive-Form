@@ -91,3 +91,26 @@ document.getElementById('gender').addEventListener('change',(event)=>{
     const data = event.target.value;
     localStorage.setItem('Gender',data);
 })
+
+
+//Show and Hide Passwords
+document.querySelector('.showPswd').addEventListener('click',()=>{
+    document.querySelector('.showPswd').style.visibility = 'hidden';
+    document.querySelector('.hidePswd').style.visibility = 'visible';
+    document.querySelector('#password').type = 'text';
+})
+document.querySelector('.hidePswd').addEventListener('click',()=>{
+    document.querySelector('.showPswd').style.visibility = 'visible';
+    document.querySelector('.hidePswd').style.visibility = 'hidden';
+    document.querySelector('#password').type = 'password';
+})
+document.querySelector('.showcnfPswd').addEventListener('click',()=>{
+    document.querySelector('.showcnfPswd').style.visibility = 'hidden';
+    document.querySelector('.hidecnfPswd').style.visibility = 'visible';
+    document.querySelector('#cnfPswd').type = 'text';
+})
+document.querySelector('.hidecnfPswd').addEventListener('click',()=>{
+    document.querySelector('.showcnfPswd').style.visibility = 'visible';
+    document.querySelector('.hidecnfPswd').style.visibility = 'hidden';
+    document.querySelector('#cnfPswd').type = 'password';
+})

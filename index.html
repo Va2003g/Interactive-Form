@@ -36,12 +36,16 @@
                         <label for="password">Password:</label>
                         <input type="password" id="password" name="password" required onchange="pswdHandler(event)">
                         <p id="pswError">Password should be 8 characters long.</p>
+                        <img src="./images/blind.png" alt="" class="hidePswd">
+                        <img src="./images/view.png" alt="" class="showPswd">
                     </div>
 
                     <div>
                         <label for="cnfPswd">Confirm Password: </label>
                         <input type="password" id="cnfPswd" name="Confirm Password" required onchange="cnfpswdHandler(event)">
                         <p id="cnfError">Passwords do not matched.</p>
+                        <img src="./images/blind.png" alt="" class="hidecnfPswd">
+                        <img src="./images/view.png" alt="" class="showcnfPswd">
                     </div>
                 </div>
 

@@ -41,6 +41,7 @@
     display: flex;
     /* flex-direction: column; */
     gap: 20px;
+    position:relative;
 }
 
 .form form>div>div {
@@ -95,7 +96,42 @@
     color:red;
     font-size: 12px;
 }
+.hidePswd{
+    width:25px;
+    height: 30px;
+    position: absolute;
+    top:58%;
+    left:35%;
+    visibility:hidden;
+}
+.showPswd{
+    width:20px;
+    height: 20px;
+    position: absolute;
+    top:58%;
+    left:35%;
+    visibility:visible;
+}
+.hidecnfPswd{
+    width:25px;
+    height: 30px;
+    position: absolute;
+    top:58%;
+    left:77%;
+    visibility: hidden;
+}
+.showcnfPswd{
+    width:20px;
+    height: 20px;
+    position: absolute;
+    top:58%;
+    left:77%;
+    visibility: visible;
+}
 
+#dob{
+    font-size:17px;
+}
 #gender {
     text-align: center;
     width: 70px;
