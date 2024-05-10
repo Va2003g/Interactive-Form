@@ -73,14 +73,7 @@ function phoneHandler(event) {
 function submitHandler(event) {
     event.preventDefault();
     console.log(localStorage);
-    Toastify({
-        text: "Data Saved Successfully",
-        duration: 4500,
-        destination: "https://github.com/apvarun/toastify-js",
-        newWindow: true,
-        gravity: "top",
-        position: 'center',
-      }).showToast();
+    Toastify(finalValidation()).showToast();
 }
 
 //Handling Date of birth and Gender
@@ -136,4 +129,33 @@ function formatPhoneNo(number){
     console.log(formatedNumber);
     return formatedNumber;
 
+}
+
+
+//checking if all inputs are correct
+function finalValidation()
+{
+    var options = {
+        text: "Data Saved Successfully",
+        duration: 4500,
+        destination: "https://github.com/apvarun/toastify-js",
+        newWindow: true,
+        gravity: "top",
+        position: 'center',
+    };
+    errObject.forEach(ele=>{
+        if(ele.style.display==='block')
+        {
+            options = {
+                text: "Kindly! Solve all errors before submitting.",
+                duration: 4500,
+                destination: "https://github.com/apvarun/toastify-js",
+                newWindow: true,
+                gravity: "top",
+                position: 'center',
+            };
+            return options;
+        }
+    })
+    return options;
 }
