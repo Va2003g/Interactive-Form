@@ -3,7 +3,6 @@
 const errObject = document.querySelectorAll('.form form input + p');
 console.log(errObject);
 
-// errObject[5].style.display = "block";
 //validations.
 
 function nameHandler(event) {
@@ -62,8 +61,9 @@ function cnfpswdHandler(event) {
 function phoneHandler(event) {
     const phoneno = event.target.value;
     if (phoneno.length == 10) {
-        localStorage.setItem('Phone No ', phoneno);
         errObject[4].style.display = 'none';
+        event.target.value = formatPhoneNo(phoneno);
+        localStorage.setItem('Phone No ', event.target.value);
     }
     else {
         errObject[4].style.display = 'block';
@@ -73,8 +73,17 @@ function phoneHandler(event) {
 function submitHandler(event) {
     event.preventDefault();
     console.log(localStorage);
+    Toastify({
+        text: "Data Saved Successfully",
+        duration: 4500,
+        destination: "https://github.com/apvarun/toastify-js",
+        newWindow: true,
+        gravity: "top",
+        position: 'center',
+      }).showToast();
 }
 
+//Handling Date of birth and Gender
 document.getElementById('dob').addEventListener('change', (event) => {
     const date = event.target.value;
     localStorage.setItem('Date Of Birth', date.split('-').reverse().join('-'));
@@ -84,7 +93,7 @@ document.getElementById('gender').addEventListener('change', (event) => {
     localStorage.setItem('Gender', data);
 })
 
-
+//Handling show and hide password behaviour
 let showPswd = document.querySelector('.showPswd');
 console.log(showPswd);
 showPswd.addEventListener('click', () => {
@@ -113,3 +122,18 @@ showcnfPswd.addEventListener('click', () => {
         imgNode.src = './images/view.png';
     }
 });
+
+// Formating Phone input;
+function formatPhoneNo(number){
+    let formatedNumber='';
+    Array.from(number).forEach((element,index) => {
+        formatedNumber+=element;
+        if(index===2 || index==5)
+        {
+            formatedNumber+='-';
+        }
+    });
+    console.log(formatedNumber);
+    return formatedNumber;
+
+}

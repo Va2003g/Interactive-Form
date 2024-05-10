@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interactive Form</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 </head>
 
 <body>
@@ -56,7 +57,7 @@
                     <div>
 
                         <label for="phoneNo">Phone No: </label>
-                        <input type="tel" name="phoneNo" id="phoneNo" required onchange="phoneHandler(event)">
+                        <input type="text" name="phoneNo" id="phoneNo" required onchange="phoneHandler(event)">
                         <p id="phoneError">Phone number should be valid</p>
                     </div>
                 </div>
@@ -84,6 +85,7 @@
     </div>
 
     <script src="index.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 </body>
 
 </html>
