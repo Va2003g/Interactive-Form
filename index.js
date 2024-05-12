@@ -1,8 +1,21 @@
 
 //variables
-const errObject = document.querySelectorAll('.form form input + p');
+let errObject = document.querySelectorAll('.form form input + p');
+console.log(errObject);
+errObject = Array.from(errObject);
+errObject.push(document.querySelector('#pswError'));
+errObject.push(document.querySelector('#cnfError'));
 console.log(errObject);
 
+let data = {
+    name:"",
+    email:"",
+    phoneNo:"",
+    Gender:"",
+    DateOfBirth:"",
+    Password:"",
+    ConfirnPassword:"",
+}
 //validations.
 
 function nameHandler(event) {
@@ -11,10 +24,11 @@ function nameHandler(event) {
     const regEx2 = /^[A-Za-z]+$/;
     if (name != '' && (regEx.test(name) || regEx2.test(name))) {
         console.log('Name ok');
-        localStorage.setItem("Name", name);
-        errObject[0].style.display = "none";
+        // localStorage.setItem("Name", name);
+        data.name = name;
+        document.querySelector('#nameError').style.display = "none";
     } else {
-        errObject[0].style.display = "block";
+        document.querySelector('#nameError').style.display = "block";
     }
 }
 
@@ -23,10 +37,11 @@ function emailHandler(event) {
     const regEx = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z.]{2,}$/;
     if (regEx.test(email)) {
         console.log('email ok');
-        localStorage.setItem("Email Id", email);
-        errObject[1].style.display = "none";
+        // localStorage.setItem("Email Id", email);
+        data.email = email;
+        document.querySelector('#emailError').style.display = "none";
     } else {
-        errObject[1].style.display = "block";
+        document.querySelector('#emailError').style.display = "block";
     }
 }
 
@@ -34,13 +49,12 @@ function pswdHandler(event) {
     const pswd = event.target.value;
     if (pswd.length >= 8 || pswd.length == 0) {
         console.log('password ok');
-        localStorage.setItem("Password", pswd);
-        errObject[2].style.display = "none";
+        // localStorage.setItem("Password", pswd);
+        data.Password = pswd;
+        document.querySelector('#pswError').style.display = "none";
     }
     else {
-        errObject[2].style.display = 'block';
-        document.getElementsByClassName('showPswd')[0].style.top = "46%";
-        document.getElementsByClassName('showcnfPswd')[0].style.top = "46%";
+        document.querySelector('#pswError').style.display = 'block';
     }
 }
 function cnfpswdHandler(event) {
@@ -48,71 +62,78 @@ function cnfpswdHandler(event) {
     const pswd = document.getElementById('password').value;
     if (pswd === cnfpswd) {
         console.log('confirm password ok');
-        localStorage.setItem("Confirm Password", cnfpswd);
-        errObject[3].style.display = "none";
+        // localStorage.setItem("Confirm Password", cnfpswd);
+        data.ConfirnPassword = cnfpswd;
+        document.querySelector('#cnfError').style.display = "none";
     }
     else {
-        errObject[3].style.display = 'block';
-        document.getElementsByClassName('showcnfPswd')[0].style.top = "46%";
-        document.getElementsByClassName('showPswd')[0].style.top = "46%";
+        document.querySelector('#cnfError').style.display = 'block';
+        
     }
 }
 
 function phoneHandler(event) {
     const phoneno = event.target.value;
     if (phoneno.length == 10) {
-        errObject[4].style.display = 'none';
+        document.querySelector('#phoneError').style.display = 'none';
         event.target.value = formatPhoneNo(phoneno);
-        localStorage.setItem('Phone No ', event.target.value);
+        // localStorage.setItem('Phone No ', event.target.value);
+        data.phoneNo = phoneno;
     }
     else {
-        errObject[4].style.display = 'block';
+        document.querySelector('#phoneError').style.display = 'block';
     }
 }
 
 function submitHandler(event) {
     event.preventDefault();
-    console.log(localStorage);
-    Toastify(finalValidation()).showToast();
+    const option = finalValidation();
+    if(option.text==="Data Saved Successfully")
+    {
+        localStorage.setItem('User Data',JSON.stringify(data));
+        Toastify(option).showToast();
+    }
+    else{
+        Toastify(finalValidation()).showToast();
+    }
 }
 
 //Handling Date of birth and Gender
 document.getElementById('dob').addEventListener('change', (event) => {
     const date = event.target.value;
-    localStorage.setItem('Date Of Birth', date.split('-').reverse().join('-'));
+    data.DateOfBirth = date.split('-').reverse().join('-');
 })
 document.getElementById('gender').addEventListener('change', (event) => {
     const data = event.target.value;
-    localStorage.setItem('Gender', data);
+    // localStorage.setItem('Gender', data);
+    data.Gender = data;
 })
 
 //Handling show and hide password behaviour
-let showPswd = document.querySelector('.showPswd');
-console.log(showPswd);
-showPswd.addEventListener('click', () => {
+const imgNode = document.querySelector('#pswdEye');
+console.log(imgNode);
+imgNode.addEventListener('click', () => {
     const passwordInput = document.querySelector('#password');
-    const imgNode = document.querySelector('.showPswd');
 
     if (passwordInput.type === 'password') {
         passwordInput.type = 'text';
-        imgNode.src = './images/blind.png';
+        imgNode.innerHTML = 'visibility_off'
     } else {
         passwordInput.type = 'password';
-        imgNode.src = './images/view.png';
+        imgNode.innerHTML = 'visibility'
     }
 });
 
-let showcnfPswd = document.querySelector('.showcnfPswd');
-showcnfPswd.addEventListener('click', () => {
+let cnfEye = document.querySelector('#cnfEye');
+cnfEye.addEventListener('click', () => {
     const passwordInput = document.querySelector('#cnfPswd');
-    const imgNode = document.querySelector('.showcnfPswd');
 
     if (passwordInput.type === 'password') {
         passwordInput.type = 'text';
-        imgNode.src = './images/blind.png';
+        cnfEye.innerHTML = 'visibility_off';
     } else {
         passwordInput.type = 'password';
-        imgNode.src = './images/view.png';
+        cnfEye.innerHTML = 'visibility'
     }
 });
 
@@ -128,7 +149,6 @@ function formatPhoneNo(number){
     });
     console.log(formatedNumber);
     return formatedNumber;
-
 }
 
 
@@ -138,7 +158,7 @@ function finalValidation()
     var options = {
         text: "Data Saved Successfully",
         duration: 4500,
-        destination: "https://github.com/apvarun/toastify-js",
+        destination: "https://gitlab.com/vansh.gupta3/interactive-form",
         newWindow: true,
         gravity: "top",
         position: 'center',
@@ -149,7 +169,7 @@ function finalValidation()
             options = {
                 text: "Kindly! Solve all errors before submitting.",
                 duration: 4500,
-                destination: "https://github.com/apvarun/toastify-js",
+                destination: "https://gitlab.com/vansh.gupta3/interactive-form",
                 newWindow: true,
                 gravity: "top",
                 position: 'center',

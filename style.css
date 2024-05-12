@@ -2,49 +2,26 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    overflow-y: hidden;
+    overflow-x: hidden;
 }
 
 .wrapper {
-    /* width: 1440px;
-    height: 1024px; */
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     background: linear-gradient(243deg, #DAECF6 -0.78%, rgba(217, 236, 246, 0.54) 4.42%, rgba(218, 224, 227, 0.37) 9.08%, rgba(218, 221, 223, 0.23) 22.11%, rgba(218, 220, 221, 0.16) 26.74%, rgba(217, 219, 220, 0.11) 34.37%, rgba(255, 255, 255, 0.07) 49.83%, rgba(217, 217, 217, 0.00) 100.71%);
-    /* background: linear-gradient(297deg, #FFF 0.6%, #FAD4E4 99.59%); */
     display: flex;
-    justify-content: space-between;
+    justify-content:center;
     align-items: center;
 }
-.loader {
-    width: 150px;
-    padding: 8px;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    background: #25b09b;
-    --_m: 
-      conic-gradient(#0000 10%,#000),
-      linear-gradient(#000 0 0) content-box;
-    -webkit-mask: var(--_m);
-            mask: var(--_m);
-    -webkit-mask-composite: source-out;
-            mask-composite: subtract;
-    animation: l3 1s infinite linear;
-    display:none;
-  }
-  @keyframes l3 {to{transform: rotate(1turn)}}
 
 .img {
-    display: inline-block;
-    width: 48%;
-    /* height: 800px; */
-    height: 100%;
+    position: relative;
+    width: 50%;
+    height: 111%;
+    left:-4.8%;
 }
 
-.form {
-    display: inline-block;
-    width: 49%;
-    height: 100%;
-}
 
 .form form {
     width: 100%;
@@ -69,7 +46,7 @@
 
 .img img {
     width: 100%;
-    height: 800px;
+    height: 100%;
 }
 
 .form form label {
@@ -100,51 +77,38 @@
     padding:3%;
     font-size: 14px;
     position: relative;
+    z-index: 8;
 }
 .form form input:focus{
-    border-color:#E8E8E8;
+    outline:none;
+    border-color: green;
 }
-.form form input + p{
+select:focus{
+    outline-color: green;
+}
+.form form input + p,#pswError,#cnfError{
     color:red;
     font-size: 12px;
-    display: none;
+    display: none;    
 }
-.form form input + p::before{
+.form form input + p::before,#pswError::before,#cnfError::before{
     content: "*";
     color:red;
     font-size: 12px;
 }
-.hidePswd{
-    width:25px;
-    height: 30px;
-    position: absolute;
-    top:58%;
-    left:35%;
-    visibility:hidden;
+#pswdDiv{
+    position: relative;
 }
-.showPswd{
-    width:20px;
-    height: 20px;
-    position: absolute;
-    top:58%;
-    left:35%;
-    visibility:visible;
+.eyeicon{
+    position:absolute;
+    z-index: 9;
+    left:87%;
+    top:30%;
+    cursor: pointer;
+    user-select: none;
 }
-.hidecnfPswd{
-    width:25px;
-    height: 30px;
-    position: absolute;
-    top:58%;
-    left:77%;
-    visibility: hidden;
-}
-.showcnfPswd{
-    width:20px;
-    height: 20px;
-    position: absolute;
-    top:58%;
-    left:77%;
-    visibility: visible;
+#cnfDiv{
+    position: relative;
 }
 
 #dob{
@@ -152,7 +116,7 @@
 }
 #gender {
     text-align: center;
-    width: 70px;
+    width: 110px;
 }
 
 #termconditions {
@@ -166,7 +130,6 @@
 
 #submit{
     align-self:center;
-    margin-left: -110px;
 }
 #submitbtn {
     width: 435px;
@@ -181,4 +144,169 @@
     line-height: normal;
     letter-spacing: 0.4px;
     align-self:center;
+    /* opacity: 0.3; */
+}
+
+/*Media Queries*/
+@media only screen and (max-height:551px){
+    *{
+        overflow-y: scroll;
+    }
+}
+@media only screen and (max-width:300px){
+    *{
+        overflow-y: scroll;
+    }
+}
+@media only screen and (max-width:1157px){
+    .form form input{
+        width:250px;
+    }
+    .eyeicon{
+        right:-5%;
+        user-select: none;
+    }
+    #submitbtn{
+        width: 300px;
+    }
+    .img {
+        left:-10.8%;
+    }
+    #dob{
+        font-size:13px;
+    }
+    .error{
+        width: 120px;
+    }
+}
+@media only screen and (max-width:1160px){
+    .form form input{
+        width:200px;
+    }
+    .eyeicon{
+        left:85%;
+        user-select: none;
+    }
+   
+}
+@media only screen and (min-width:1441px){
+    .form form{
+        gap:100px;
+        font-size: 20px;
+    }
+}
+
+@media only screen and (max-width:847px){
+    .form form label{
+        font-size: 15px;
+    }
+    .form form input{
+        width:150px;
+    }
+    #submitbtn{
+        width: 250px;
+    }
+    .eyeicon{
+        left:80%;
+        user-select: none;
+    }
+   
+}
+@media only screen and (max-width:647px){
+    .form form label{
+        font-size: 15px;
+    }
+    .form form input{
+        width:130px;
+    }
+    #submitbtn{
+        width: 250px;
+    }
+    .eyeicon{
+        left:75%;
+        user-select: none;
+    }
+}
+@media only screen and (max-width:557px){
+    .img{
+        display: none;
+    }
+    .form form input{
+        width:190px;
+        height: 40px;
+    }
+    .eyeicon{
+        left:85%;
+        user-select: none;
+    }
+    .form form .error{
+        width:fit-content;
+        height: fit-content;
+    }
+}
+@media only screen and (max-width:420px){
+    .wrapper{
+        padding: 10px;
+    }
+    .form form input{
+        width:170px;
+        height: 40px;
+    }
+    .eyeicon{
+        left:79%;
+        user-select: none;
+    }
+    .form form .error{
+        width:150px;
+        height: fit-content;
+    }
+}
+@media only screen and (min-width:300px) and (max-width:376px) 
+{
+
+    .eyeicon{
+        left:63%;
+    }
+    
+}
+@media only screen and (max-width:376px){
+    .wrapper{
+        padding:13px;
+    }
+    .form{
+        width:100%;
+        height: 100%;
+    }
+    .form form{
+        gap:10px;
+    }
+    .form form > div{
+        flex-direction: column;
+        gap:10px;
+    }
+    .form form > div > div{
+        gap:7px;
+    }
+    #submit{
+        margin-top:12px;
+    }
+    #submitbtn{
+        width: 200px;
+        height: 40px;
+    }
+    .form form .box{
+        flex-direction: row;
+        gap:20px;
+    }
+    .form form input{
+        width:250px;
+        height: 40px;
+    }
+    .form form .error{
+        width:fit-content;
+        height: fit-content;
+    }
+    .eyeicon{
+        top:9.5px;
+    }
 }

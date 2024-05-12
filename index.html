@@ -3,10 +3,12 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
     <title>Interactive Form</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 </head>
 
 <body>
@@ -22,29 +24,39 @@
                     <div>
                         <label for="name">Name: </label>
                         <input type="text" id="name" name="name" required onchange="nameHandler(event)">
-                        <p id="nameError">Name should contain only alphabets.</p>
+                        <p id="nameError" class="error">Name should contain only alphabets.</p>
                     </div>
 
                     <div>
                         <label for="email">Email: </label>
                         <input type="email" id="email" name="email" required onchange="emailHandler(event)">
-                        <p id="emailError">Email id should be in correct format.</p>
+                        <p id="emailError" class="error">Email id should be in correct format.</p>
                     </div>
                 </div>
 
                 <div id="Password">
                     <div>
                         <label for="password">Password:</label>
-                        <input type="password" id="password" name="password" required onchange="pswdHandler(event)"/>
-                        <p id="pswError">Password should be 8 characters long.</p>
-                        <img src="./images/view.png" alt="" class="showPswd">
+                        <div id="pswdDiv">
+                            <input type="password" id="password" name="password" required
+                                onchange="pswdHandler(event)" />
+                            <span class="material-symbols-outlined eyeicon" id="pswdEye">
+                                visibility
+                            </span>
+                        </div>
+                        <p id="pswError" class="error">Password should be 8 characters long.</p>
                     </div>
 
                     <div>
                         <label for="cnfPswd">Confirm Password: </label>
-                        <input type="password" id="cnfPswd" name="Confirm Password" required onchange="cnfpswdHandler(event)">
-                        <p id="cnfError">Passwords do not matched.</p>
-                        <img src="./images/view.png" alt="" class="showcnfPswd">
+                        <div id="cnfDiv">
+                            <input type="password" id="cnfPswd" name="Confirm Password" required
+                                onchange="cnfpswdHandler(event)">
+                                <span class="material-symbols-outlined eyeicon" id="cnfEye">
+                                    visibility
+                                </span>
+                        </div>
+                        <p id="cnfError" class="error">Passwords do not matched.</p>
                     </div>
                 </div>
 
@@ -58,15 +70,16 @@
 
                         <label for="phoneNo">Phone No: </label>
                         <input type="text" name="phoneNo" id="phoneNo" required onchange="phoneHandler(event)">
-                        <p id="phoneError">Phone number should be valid</p>
+                        <p id="phoneError" class="error">Phone number should be valid</p>
                     </div>
                 </div>
 
                 <div class="box">
                     <label for="gender">Gender: </label>
                     <select name="gender" id="gender" required>
-                        <option value="Female">Female</option>
+                        <option value="Male">Select Gender</option>
                         <option value="Male">Male</option>
+                        <option value="Female">Female</option>
                         <option value="Other">Other</option>
                     </select>
                 </div>
