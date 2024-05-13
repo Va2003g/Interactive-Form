@@ -22,14 +22,16 @@ function enableSubmit(submitState)
 {
     submitState ? document.getElementById('submitbtn').style.opacity = '1.0' : document.getElementById('submitbtn').style.opacity = '0.5';
 }
-//validations.
+
+
+//validations handlers.
 
 function nameHandler(event) {
     const name = event.target.value;
     if (name != '' && (regExName.test(name) || regExFullName.test(name))) {
         console.log('Name ok');
         // localStorage.setItem("Name", name);
-        data.name = name;
+        data.Name = name;
         document.querySelector('#nameError').style.display = "none";
     } else {
         document.querySelector('#nameError').style.display = "block";
@@ -44,7 +46,7 @@ function emailHandler(event) {
     if (regExEmail.test(email)) {
         console.log('email ok');
         // localStorage.setItem("Email Id", email);
-        data.email = email;
+        data.Email = email;
         document.querySelector('#emailError').style.display = "none";
     } else {
         document.querySelector('#emailError').style.display = "block";
@@ -86,11 +88,11 @@ function cnfpswdHandler(event) {
 
 function phoneHandler(event) {
     const phoneno = event.target.value;
-    if (phoneno.length == 10) {
+    if (phoneno.length == 10 && !regExName.test(phoneno)) {
         document.querySelector('#phoneError').style.display = 'none';
         event.target.value = formatPhoneNo(phoneno);
         // localStorage.setItem('Phone No ', event.target.value);
-        data.phoneNo = event.target.value;
+        data.PhoneNo = event.target.value;
     }
     else {
         event.target.value = '';
@@ -124,6 +126,49 @@ function checkFormFilled()
     return result;
 }
 
+// Formating Phone input;
+function formatPhoneNo(number){
+    let formatedNumber='';
+    Array.from(number).forEach((element,index) => {
+        formatedNumber+=element;
+        if(index===2 || index==5)
+        {
+            formatedNumber+='-';
+        }
+    });
+    console.log(formatedNumber);
+    return formatedNumber;
+}
+
+
+//checking if all inputs are correct
+function finalValidation()
+{
+    var options = {
+        text: "Data Saved Successfully",
+        duration: 4500,
+        destination: "https://gitlab.com/vansh.gupta3/interactive-form",
+        newWindow: true,
+        gravity: "top",
+        position: 'center',
+    };
+    errObject.forEach(ele=>{
+        if(ele.style.display==='block')
+        {
+            options = {
+                text: "Kindly! Solve all errors before submitting.",
+                duration: 4500,
+                destination: "https://gitlab.com/vansh.gupta3/interactive-form",
+                newWindow: true,
+                gravity: "top",
+                position: 'center',
+            };
+            return options;
+        }
+    })
+    return options;
+}
+
 function submitHandler(event) {
     event.preventDefault();
     const option = finalValidation();
@@ -152,7 +197,17 @@ function submitHandler(event) {
 
 //Handling Date of birth and Gender
 document.getElementById('dob').addEventListener('change', (event) => {
+
     const date = event.target.value;
+    if(new Date(date) > new Date())
+    {
+        event.target.value = '';
+        document.getElementById('dateError').style.display = 'block'
+    }
+    else
+    {
+        document.getElementById('dateError').style.display = 'none'
+    }
     data.DateOfBirth = date.split('-').reverse().join('-');
     submitState = checkFormFilled() && finalValidation().text==='Data Saved Successfully'
     enableSubmit(submitState);
@@ -199,45 +254,3 @@ cnfEye.addEventListener('click', () => {
     }
 });
 
-// Formating Phone input;
-function formatPhoneNo(number){
-    let formatedNumber='';
-    Array.from(number).forEach((element,index) => {
-        formatedNumber+=element;
-        if(index===2 || index==5)
-        {
-            formatedNumber+='-';
-        }
-    });
-    console.log(formatedNumber);
-    return formatedNumber;
-}
-
-
-//checking if all inputs are correct
-function finalValidation()
-{
-    var options = {
-        text: "Data Saved Successfully",
-        duration: 4500,
-        destination: "https://gitlab.com/vansh.gupta3/interactive-form",
-        newWindow: true,
-        gravity: "top",
-        position: 'center',
-    };
-    errObject.forEach(ele=>{
-        if(ele.style.display==='block')
-        {
-            options = {
-                text: "Kindly! Solve all errors before submitting.",
-                duration: 4500,
-                destination: "https://gitlab.com/vansh.gupta3/interactive-form",
-                newWindow: true,
-                gravity: "top",
-                position: 'center',
-            };
-            return options;
-        }
-    })
-    return options;
-}
