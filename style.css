@@ -144,7 +144,9 @@ select:focus{
     line-height: normal;
     letter-spacing: 0.4px;
     align-self:center;
-    /* opacity: 0.3; */
+    opacity: 0.5;
+    transition: opacity 1.5s 0.5s ease-in-out;
+    cursor: pointer;
 }
 
 /*Media Queries*/

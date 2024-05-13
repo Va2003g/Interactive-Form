@@ -8,20 +8,24 @@ errObject.push(document.querySelector('#cnfError'));
 console.log(errObject);
 
 let data = {
-    name:"",
-    email:"",
-    phoneNo:"",
+    Name:"",
+    Email:"",
+    PhoneNo:"",
     Gender:"",
     DateOfBirth:"",
     Password:"",
-    ConfirnPassword:"",
+}
+
+//variable to activate submit button
+let submitState = true;
+function enableSubmit(submitState)
+{
+    submitState ? document.getElementById('submitbtn').style.opacity = '1.0' : document.getElementById('submitbtn').style.opacity = '0.5';
 }
 //validations.
 
 function nameHandler(event) {
     const name = event.target.value;
-    // const regEx = /^[A-Za-z]+\ [A-Za-z]+$/;
-    // const regEx2 = /^[A-Za-z]+$/;
     if (name != '' && (regExName.test(name) || regExFullName.test(name))) {
         console.log('Name ok');
         // localStorage.setItem("Name", name);
@@ -30,6 +34,8 @@ function nameHandler(event) {
     } else {
         document.querySelector('#nameError').style.display = "block";
     }
+    submitState = checkFormFilled() && finalValidation().text==='Data Saved Successfully';
+    enableSubmit(submitState);
 }
 
 function emailHandler(event) {
@@ -43,6 +49,8 @@ function emailHandler(event) {
     } else {
         document.querySelector('#emailError').style.display = "block";
     }
+    submitState = checkFormFilled() && finalValidation().text==='Data Saved Successfully'
+    enableSubmit(submitState);
 }
 
 function pswdHandler(event) {
@@ -56,6 +64,8 @@ function pswdHandler(event) {
     else {
         document.querySelector('#pswError').style.display = 'block';
     }
+    submitState = checkFormFilled() && finalValidation().text==='Data Saved Successfully'
+    enableSubmit(submitState);
 }
 function cnfpswdHandler(event) {
     const cnfpswd = event.target.value;
@@ -63,13 +73,15 @@ function cnfpswdHandler(event) {
     if (pswd === cnfpswd) {
         console.log('confirm password ok');
         // localStorage.setItem("Confirm Password", cnfpswd);
-        data.ConfirnPassword = cnfpswd;
+        // data.ConfirnPassword = cnfpswd;
         document.querySelector('#cnfError').style.display = "none";
     }
     else {
         document.querySelector('#cnfError').style.display = 'block';
         
     }
+    submitState = checkFormFilled() && finalValidation().text==='Data Saved Successfully'
+    enableSubmit(submitState);
 }
 
 function phoneHandler(event) {
@@ -78,16 +90,56 @@ function phoneHandler(event) {
         document.querySelector('#phoneError').style.display = 'none';
         event.target.value = formatPhoneNo(phoneno);
         // localStorage.setItem('Phone No ', event.target.value);
-        data.phoneNo = phoneno;
+        data.phoneNo = event.target.value;
     }
     else {
+        event.target.value = '';
         document.querySelector('#phoneError').style.display = 'block';
     }
+    submitState = checkFormFilled() && finalValidation().text==='Data Saved Successfully'
+    enableSubmit(submitState);
+}
+
+function checkFormFilled()
+{
+    const inputElement = document.querySelectorAll('input,select');
+    console.log(inputElement)
+    let result = true;
+    Array.from(inputElement).forEach((ele)=>{
+        if(ele.tagName.toLowerCase()==='select')
+        {
+            if(ele.selectedIndex==0) result = false;
+        }
+        else if(ele.type==='checkbox')
+        {
+            if(!ele.checked) result = false;
+        }
+        
+        else if(ele.value.length===0)
+        {
+            result = false;
+        }
+    })
+    console.log(result);
+    return result;
 }
 
 function submitHandler(event) {
     event.preventDefault();
     const option = finalValidation();
+    if(!checkFormFilled())
+    {
+        let options = {
+            text: "Kindly fill the Complete Data",
+            duration: 4500,
+            destination: "https://gitlab.com/vansh.gupta3/interactive-form",
+            newWindow: true,
+            gravity: "top",
+            position: 'center',
+        };
+        Toastify(options).showToast();
+        return;
+    }
     if(option.text==="Data Saved Successfully")
     {
         localStorage.setItem('User Data',JSON.stringify(data));
@@ -102,11 +154,21 @@ function submitHandler(event) {
 document.getElementById('dob').addEventListener('change', (event) => {
     const date = event.target.value;
     data.DateOfBirth = date.split('-').reverse().join('-');
+    submitState = checkFormFilled() && finalValidation().text==='Data Saved Successfully'
+    enableSubmit(submitState);
 })
 document.getElementById('gender').addEventListener('change', (event) => {
-    const data = event.target.value;
+    // const data = event.target.value;
     // localStorage.setItem('Gender', data);
-    data.Gender = data;
+    data.Gender = event.target.value;
+    submitState = checkFormFilled() && finalValidation().text==='Data Saved Successfully'
+    enableSubmit(submitState);
+})
+document.getElementById('termconditions').addEventListener('click', (event) => {
+    // const data = event.target.value;
+    // localStorage.setItem('Gender', data);
+    submitState = checkFormFilled() && finalValidation().text==='Data Saved Successfully'
+    enableSubmit(submitState);
 })
 
 //Handling show and hide password behaviour
