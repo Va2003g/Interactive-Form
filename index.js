@@ -20,9 +20,9 @@ let data = {
 
 function nameHandler(event) {
     const name = event.target.value;
-    const regEx = /^[A-Za-z]+\ [A-Za-z]+$/;
-    const regEx2 = /^[A-Za-z]+$/;
-    if (name != '' && (regEx.test(name) || regEx2.test(name))) {
+    // const regEx = /^[A-Za-z]+\ [A-Za-z]+$/;
+    // const regEx2 = /^[A-Za-z]+$/;
+    if (name != '' && (regExName.test(name) || regExFullName.test(name))) {
         console.log('Name ok');
         // localStorage.setItem("Name", name);
         data.name = name;
@@ -34,8 +34,8 @@ function nameHandler(event) {
 
 function emailHandler(event) {
     const email = event.target.value;
-    const regEx = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z.]{2,}$/;
-    if (regEx.test(email)) {
+    // const regEx = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z.]{2,}$/;
+    if (regExEmail.test(email)) {
         console.log('email ok');
         // localStorage.setItem("Email Id", email);
         data.email = email;
